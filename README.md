@@ -1,1 +1,2 @@
-# ecommerce2
+# ecommerce
+Computer Lab - Mini Project
