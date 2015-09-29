@@ -45,6 +45,7 @@ class User extends Password{
 		if($this->password_verify($password,$hashed) == 1){
 		    
 		    $_SESSION['loggedin'] = true;
+            $_SESSION['user']=$username; 
 		    return true;
 		}		
 	}
