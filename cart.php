@@ -2,6 +2,16 @@
 //include config
 require_once('includes/config.php');
 
+//the cart session 
+if (isset($_GET['itm']) && isset($_GET['quan'])) {
+    $item = $_GET['itm']; 
+    $quantity = $_GET['quan'];
+    $sql = "SELECT * FROM items WHERE itemID=$item";
+    $result = $db->query($sql);
+    $i = $result->fetch();
+    Cart::addToCart($i['name'],$i['price'],$i['itemID'],$i['type'],$quantity);
+} 
+
 
 ?>
 

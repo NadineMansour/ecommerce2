@@ -32,10 +32,11 @@ else
     }
     
 }
+      
 
 
-mysql_connect('localhost','root','');
-mysql_select_db('phpTrail');
+mysql_connect('localhost','blognadine','111111');
+mysql_select_db('mini1');
 
 $allItems = mysql_query($shop) or die(mysql_error());
 ?>
@@ -171,8 +172,29 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                     echo "<img alt='' src='" . $item['url']. "'style='border-radius: 25px; border: 2px;'><br>";
                                     echo "<div class='caption' style='border-top: 1px solid #ccc;'><h6>This is a product</h6>";
                                     echo "<h5 class='text-right'>$" . $item['price']. ".00 <br> Quantity: ". $item['stock'] ."</h5>";
-                                  
-                                    echo "<p class='text-right'><a class='btn btn-primary' href='#''>Add to Cart</a></p></div></div></div>";
+                                    if ($item['stock'] >= 5) {
+                                        ?>
+                                            <select name="items" onchange="location = this.options[this.selectedIndex].value;">
+                                            <option value="store.php?quan=0">0</option>
+                                            <option value="cart.php?quan=1&itm=<?php echo $item['itemID'];?>">1</option>
+                                            <option value="cart.php?quan=2&itm=<?php echo $item['itemID'];?>">2</option>
+                                            <option value="cart.php?quan=3&itm=<?php echo $item['itemID'];?>">3</option>
+                                            <option value="cart.php?quan=4&itm=<?php echo $item['itemID'];?>">4</option>
+                                            <option value="cart.php?quan=5&itm=<?php echo $item['itemID'];?>">5</option>
+                                            </select>
+                                        <?                                         
+                                    }
+                                    else{
+                                        echo "<select name='items' onchange='location = this.options[this.selectedIndex].value;''>";
+                                        echo "<option value='store.php?quan=0'>0</option>";
+                                        for ($x = 1; $x <= $item['stock']; $x++) {
+                                            ?>
+                                                <option value="cart.php?quan=<?php echo $x;?>&itm=<?php echo $item['itemID'];?>"><?php echo $x;?></option>;
+                                            <?
+                                        }
+                                        echo "</select>";
+                                    } 
+                                    echo "</div></div></div>";
                                     $counter = $counter + 1;
                                }
                     ?>                
