@@ -155,9 +155,12 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                     }
                                     echo "<div class='thumbnail' style=''>";
                                     echo "<img alt='' src='" . $item['url']. "'style='border-radius: 25px; border: 2px;'><br>";
-                                    echo "<div class='caption' style='border-top: 1px solid #ccc;'><h6>This is a product</h6>";
-                                    echo "<h5 class='text-right'>$" . $item['price']. ".00 <br> Quantity: ". $item['stock'] ."</h5>";
-                                    if ($item['stock'] >= 5) {
+                                    echo "<h5 class='pull-right' >$" . $item['price']. ".00"."</h5>";
+                                    echo "<div class='caption' style='border-top: 1px solid #ccc;'><h5>".$item['name']."</h5>";
+                                    echo "<h5>Stock: ". $item['stock']."</h5>";
+                                    echo "<h6>Add to cart</h6>";
+                                    $itemID = $item['itemID'];
+                                    if ($item['stock'] - Cart:: get_amount($itemID) >= 5) {
                                         ?>
                                             <select name="items" onchange="location = this.options[this.selectedIndex].value;">
                                             <option value="store.php?quan=0">0</option>
@@ -170,15 +173,16 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                         <?                                         
                                     }
                                     else{
-                                        echo "<select name='items' onchange='location = this.options[this.selectedIndex].value;''>";
+                                        echo "<select  name='items' onchange='location = this.options[this.selectedIndex].value;''>";
                                         echo "<option value='store.php?quan=0'>0</option>";
-                                        for ($x = 1; $x <= $item['stock']; $x++) {
+                                        for ($x = 1; $x <= $item['stock']-Cart:: get_amount($itemID); $x++) {
                                             ?>
                                                 <option value="cart.php?quan=<?php echo $x;?>&itm=<?php echo $item['itemID'];?>"><?php echo $x;?></option>;
                                             <?
                                         }
                                         echo "</select>";
                                     } 
+                                    
                                     echo "</div></div></div>";
                                     $counter = $counter + 1;
                                }
