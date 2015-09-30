@@ -59,14 +59,6 @@ $allItems = mysql_query($shop) or die(mysql_error());
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
 
 </head>side
 
@@ -115,39 +107,32 @@ $allItems = mysql_query($shop) or die(mysql_error());
                     </ul>
                 </div>
             </div>
-        </nav>
+    </nav>
         <br><br>
-
+        </br>
+        
     <div id="wrapper">
 
         <!-- Sidebar -->
         <div id="sidebar-wrapper">
             <ul class="sidebar-nav">
-                  <li class="sidebar-brand">
-                    <a href="store.php?gender=f">
-                        WOMEN
-                    </a>
-                  </li>
-                    <?php
-                                            
-                                            // output data of each row
-                                            while($rowf = $resultf->fetch()) {
-                                                echo '<ul><a href=store.php?type=' . $rowf['type'] . '>'.$rowf['type'].'</a></ul>';
-                                            }
-                                            ?>
+                <li class="sidebar-brand">
+                    <a href="store.php?gender=f">WOMEN</a>
+                </li>
+                <?php
+                while($rowf = $resultf->fetch()) {
+                    echo '<ul><a href=store.php?type=' . $rowf['type'] . '>'.$rowf['type'].'</a></ul>';
+                 }
+                ?>
 
-                    <li class="sidebar-brand">
-                        <a href="store.php?gender=m">
-                            MEN
-                        </a>
-                    </li>
-                      <?php
-                                                
-                                                // output data of each row
-                                                while($rowm = $resultm->fetch()) {
-                                                    echo '<ul><a href=store.php?type=' . $rowm['type'] . '>'.$rowm['type'].'</a></ul>';
-                                                }
-                                                ?>
+                <li class="sidebar-brand">
+                    <a href="store.php?gender=m">MEN</a>
+                </li>
+                <?php
+                    while($rowm = $resultm->fetch()) {
+                        echo '<ul><a href=store.php?type=' . $rowm['type'] . '>'.$rowm['type'].'</a></ul>';
+                    }
+                ?>
             </ul>
         </div>
         <!-- /#sidebar-wrapper -->

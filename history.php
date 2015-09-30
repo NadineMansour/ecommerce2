@@ -5,8 +5,15 @@ require_once('includes/config.php');
 $username = $_SESSION['user'];
 $sql = "SELECT * FROM history WHERE username='$username' ORDER BY date DESC";
 $result = $db->query($sql);
-?>
 
+
+//sidebar
+$female = "SELECT DISTINCT type FROM items WHERE gender='f'";
+$resultf = $db->query($female);
+
+$male = "SELECT DISTINCT type FROM items WHERE gender='m'";
+$resultm = $db->query($male);
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,6 +39,7 @@ $result = $db->query($sql);
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
     <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -43,23 +51,81 @@ $result = $db->query($sql);
 </head>
 
 <body>
-    <!-- Page Content -->
-    <div class="container">
 
-        <div class="row">
-
-            <div class="col-md-3">
-
-            </div>
-
-            <div class="col-md-9">
-
-                <div class="row carousel-holder">
-
+ <nav class="navbar navbar-default navbar-fixed-top" style="background: #000; margin-bottom: 10px;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-target=
+                    "#navbar" data-toggle="collapse" type="button"><span class=
+                    "sr-only">Toggle navigation</span> <span class=
+                    "icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button> <a class=
+                    "navbar-brand" href="index.php">Doola</a>
                 </div>
 
-                <div class="row">
+                 <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="login.php">
+                                <?php
+                                   if($user->is_logged_in())
+                                   {
+                                        echo $_SESSION['username'];
+                                   }
+                                   else
+                                   {
+                                        echo"Sign in";
+                                   }
+                                ?>
+                            </a>
+                        </li>
 
+                        <li>
+                            <?php
+                                   if($user->is_logged_in())
+                                   {
+                                        echo "<a href='logout.php'> Log out </a>" ;
+                                   }
+                                   else
+                                   {
+                                        echo "<a href='signup.php'> Register </a>";
+                                   }
+                            ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </nav>
+
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="store.php?gender=f">WOMEN</a>
+            </li>
+            <?php
+            while($rowf = $resultf->fetch()) {
+                echo '<ul><a href=store.php?type=' . $rowf['type'] . '>'.$rowf['type'].'</a></ul>';
+             }
+            ?>
+
+            <li class="sidebar-brand">
+                <a href="store.php?gender=m">MEN</a>
+            </li>
+            <?php
+                while($rowm = $resultm->fetch()) {
+                    echo '<ul><a href=store.php?type=' . $rowm['type'] . '>'.$rowm['type'].'</a></ul>';
+                }
+            ?>
+        </ul>
+    </div>
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-md-9">
+                <div class="row">
                 	<?php
                 	$count = 0;
 					while($row = $result->fetch()) {
@@ -71,18 +137,16 @@ $result = $db->query($sql);
 						$url = $item['url'];
 						$quantity =  $row['quantity'];
 						$total_price = $quantity * $item['price'];
-						$date = $row['date']
+						$date = $row['date'];
 	                        ?>
 		                    <div class="col-sm-4 col-lg-4 col-md-4">
 		                        <div class="thumbnail">
 
 		                            <img src="http://placehold.it/320x150" alt="">
-		                            <div class="caption">
-		                                
+		                            <div class="caption">		                                
 		                                <?php
 		                                echo "<h4 class='pull-right'>".$total_price."$</h4>";
-		                                echo "<h4>".$item_name."</h4>";
-		                                
+		                                echo "<h4>".$item_name."</h4>";		                                
                                         echo "<h4> Quantity: ".$quantity."</h4>";
                                         echo "<h4> Date: ".$date."</h4>";
 		                                ?>                                      
@@ -107,22 +171,7 @@ $result = $db->query($sql);
         </div>
 
     </div>
-    <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
+</div>
     <!-- /.container -->
 
     <!-- jQuery -->
