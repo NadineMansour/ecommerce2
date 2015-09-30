@@ -141,14 +141,15 @@ $resultm = $db->query($male);
 	                        ?>
 		                    <div class="col-sm-4 col-lg-4 col-md-4">
 		                        <div class="thumbnail">
-
-		                            <img src="http://placehold.it/320x150" alt="">
+                                    <?php
+                                        echo "<img alt='' src='" . $url . "'style='border-radius: 25px; border: 2px;'><br>";
+                                    ?>
 		                            <div class="caption">		                                
 		                                <?php
-		                                echo "<h4 class='pull-right'>".$total_price."$</h4>";
-		                                echo "<h4>".$item_name."</h4>";		                                
-                                        echo "<h4> Quantity: ".$quantity."</h4>";
-                                        echo "<h4> Date: ".$date."</h4>";
+		                                echo "<h5 class='pull-right'>".$total_price."$</h5>";
+		                                echo "<h5>".$_SESSION['cart']['name'][$count]."</h5>";	                                
+                                        echo "<h5> Quantity: ".$quantity."</h5>";
+                                        echo "<h6> Date: ".$date."</h6>";
 		                                ?>                                      
 	                            	</div>
 		                        </div>
