@@ -12,6 +12,12 @@ if (isset($_GET['itm']) && isset($_GET['quan'])) {
     Cart::addToCart($i['name'],$i['price'],$i['itemID'],$i['type'],$quantity);
 } 
 
+//sidebar
+$female = "SELECT DISTINCT type FROM items WHERE gender='f'";
+$resultf = $db->query($female);
+
+$male = "SELECT DISTINCT type FROM items WHERE gender='m'";
+$resultm = $db->query($male);
 
 ?>
 
@@ -40,6 +46,7 @@ if (isset($_GET['itm']) && isset($_GET['quan'])) {
     <!-- Custom CSS -->
     <link href="css/shop-homepage.css" rel="stylesheet">
     <link href="dist/css/sb-admin-2.css" rel="stylesheet">
+    <link href="css/simple-sidebar.css" rel="stylesheet">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -51,6 +58,74 @@ if (isset($_GET['itm']) && isset($_GET['quan'])) {
 </head>
 
 <body>
+
+ <nav class="navbar navbar-default navbar-fixed-top" style="background: #000; margin-bottom: 10px;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-target=
+                    "#navbar" data-toggle="collapse" type="button"><span class=
+                    "sr-only">Toggle navigation</span> <span class=
+                    "icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button> <a class=
+                    "navbar-brand" href="index.php">Doola</a>
+                </div>
+
+                 <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="login.php">
+                                <?php
+                                   if($user->is_logged_in())
+                                   {
+                                        echo $_SESSION['username'];
+                                   }
+                                   else
+                                   {
+                                        echo"Sign in";
+                                   }
+                                ?>
+                            </a>
+                        </li>
+
+                        <li>
+                            <?php
+                                   if($user->is_logged_in())
+                                   {
+                                        echo "<a href='logout.php'> Log out </a>" ;
+                                   }
+                                   else
+                                   {
+                                        echo "<a href='signup.php'> Register </a>";
+                                   }
+                                ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+    </nav>
+<div id="wrapper">
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+        <ul class="sidebar-nav">
+            <li class="sidebar-brand">
+                <a href="store.php?gender=f">WOMEN</a>
+            </li>
+            <?php
+            while($rowf = $resultf->fetch()) {
+                echo '<ul><a href=store.php?type=' . $rowf['type'] . '>'.$rowf['type'].'</a></ul>';
+             }
+            ?>
+            <li class="sidebar-brand">
+                <a href="store.php?gender=m">MEN</a>
+            </li>
+            <?php
+                while($rowm = $resultm->fetch()) {
+                    echo '<ul><a href=store.php?type=' . $rowm['type'] . '>'.$rowm['type'].'</a></ul>';
+                }
+            ?>
+        </ul>
+    </div>
+
     <?php  
     if (isset($_GET['item']) && isset($_GET['oper'])) {
         $item = $_GET['item']; 
@@ -79,21 +154,9 @@ if (isset($_GET['itm']) && isset($_GET['quan'])) {
 
     <!-- Page Content -->
     <div class="container">
-
         <div class="row">
-
-            <div class="col-md-3">
-
-            </div>
-
             <div class="col-md-9">
-
-                <div class="row carousel-holder">
-
-                </div>
-
                 <div class="row">
-
                 	<?php
                     if (isset($_SESSION['cart'])) {
                     
@@ -102,10 +165,8 @@ if (isset($_GET['itm']) && isset($_GET['quan'])) {
 	                        ?>
 		                    <div class="col-sm-4 col-lg-4 col-md-4">
 		                        <div class="thumbnail">
-
 		                            <img src="http://placehold.it/320x150" alt="">
 		                            <div class="caption">
-		                                
 		                                <?php
 		                                echo "<h4 class='pull-right'>".$_SESSION['cart']['price'][$count]."$</h4>";
 		                                echo "<h4>".$_SESSION['cart']['name'][$count]."</h4>";
@@ -136,22 +197,8 @@ if (isset($_GET['itm']) && isset($_GET['quan'])) {
         </div>
 
     </div>
+</div>
     <!-- /.container -->
-
-    <div class="container">
-
-        <hr>
-
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
-                </div>
-            </div>
-        </footer>
-
-    </div>
     <!-- /.container -->
 
     <!-- jQuery -->
