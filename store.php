@@ -111,6 +111,9 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                    }
                                 ?>
                         </li>
+                        <li>
+                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="background: #000; border: 0px; text-align: left;">Toggle Menu</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -183,6 +186,12 @@ $allItems = mysql_query($shop) or die(mysql_error());
 
     </div>
     <!-- /#wrapper -->
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
 
     <!-- jQuery -->
 <script src=
