@@ -35,8 +35,8 @@ else
       
 
 
-mysql_connect('localhost','blognadine','111111');
-mysql_select_db('mini1');
+mysql_connect('localhost','root','');
+mysql_select_db('phpTrail');
 
 $allItems = mysql_query($shop) or die(mysql_error());
 ?>
@@ -60,7 +60,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
 
     <!-- Custom CSS -->
 
-</head>side
+</head>
 
 <body>
 
@@ -78,11 +78,11 @@ $allItems = mysql_query($shop) or die(mysql_error());
                  <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="login.php">
+                            <a href="login.php"> 
                                 <?php
                                    if($user->is_logged_in())
                                    {
-                                        echo $_SESSION['username'];
+                                        echo "Hello, ".$_SESSION['username'];
                                    }
                                    else
                                    {
@@ -104,12 +104,18 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                    }
                                 ?>
                         </li>
+                        <li>
+                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="border: 0px; background:#000;">Toggle Menu</a>
+                        </li>
+                        <li>
+                            <a href="cart.php"> cart </a>
+                        </li>
                     </ul>
                 </div>
             </div>
     </nav>
         <br><br>
-        </br>
+        
         
     <div id="wrapper">
 
