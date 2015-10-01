@@ -10,7 +10,7 @@ if (isset($_GET['itm']) && isset($_GET['quan'])) {
     $sql = "SELECT * FROM items WHERE itemID=$item";
     $result = $db->query($sql);
     $i = $result->fetch();
-    Cart::addToCart($i['name'],$i['price'],$i['itemID'],$i['type'],$quantity);
+    Cart::addToCart($i['name'],$i['price'],$i['itemID'],$i['type'],$quantity,$i['url']);
 } 
 
 //sidebar
@@ -163,16 +163,18 @@ $resultm = $db->query($male);
                     
                         $count=0;
 						while ($count< sizeof($_SESSION['cart']['name'])) {
-	                        ?>
+	                        ?> 
 		                    <div class="col-sm-4 col-lg-4 col-md-4">
 		                        <div class="thumbnail">
-		                            <img src="http://placehold.it/320x150" alt="">
+                                    <?php
+                                        echo "<img alt='' src='" . $_SESSION['cart']['url'][$count] . "'style='border-radius: 25px; border: 2px;'><br>";
+                                    ?>
 		                            <div class="caption">
 		                                <?php
-		                                echo "<h4 class='pull-right'>".$_SESSION['cart']['price'][$count]."$</h4>";
-		                                echo "<h4>".$_SESSION['cart']['name'][$count]."</h4>";
+		                                echo "<h5 class='pull-right'>".$_SESSION['cart']['price'][$count]."$</h5>";
+		                                echo "<h5>".$_SESSION['cart']['name'][$count]."</h5>";
 		                                echo "type - ".$_SESSION['cart']['type'][$count];
-                                        echo "<h4 class='pull-right'> #".$_SESSION['cart']['amount'][$count]."</h4>";
+                                        echo "<h5 class='pull-right'> #".$_SESSION['cart']['amount'][$count]."</h5>";
                                         $plus = "p".$count;
                                         $minus = "m".$count;
                                         echo "</br>";
