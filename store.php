@@ -104,6 +104,9 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                    }
                                 ?>
                         </li>
+                        <li>
+                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="border: 0px; background:#000;">Toggle Menu</a>
+                        </li>
                     </ul>
                 </div>
             </div>
