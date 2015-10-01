@@ -92,8 +92,13 @@ $row = $result->fetch();
                     <div class="col-md-3">
                         <p class="text-center">Username:</p>
                     </div>
-                    <div class="col-md-9">
+                    <div class="col-md-8">
                         <p class=""><?php echo $row['username']; ?></p>
+                    </div>
+                    <div class="col-md-1">
+                        <button type="button" class="btn btn-default" aria-label="Left Align" id="edit">
+                            <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                        </button>
                     </div>
                 </div>
                 <div class="row">
@@ -119,6 +124,12 @@ $row = $result->fetch();
                 </div>
                 
             </div>
+            <script type="text/JavaScript">
+                document.getElementById("edit").onclick = function () {
+                location.href = "editProfile.php";
+                };
+
+            </script>
 
         
           
@@ -142,3 +153,4 @@ $row = $result->fetch();
 
 </body>
 </html>
+

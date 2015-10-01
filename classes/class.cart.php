@@ -39,6 +39,27 @@ public function addToCart($name,$price,$itemID,$type,$amount)
 	}
 }
 
+public function get_amount($itemID){
+	if(isset($_SESSION['cart'])){
+		if (in_array($itemID, $_SESSION['cart']['itemID'])) {
+	    	$count =0;
+	    	while ($count < sizeof($_SESSION['cart']['itemID'])) {
+	    		if ($_SESSION['cart']['itemID'][$count] == $itemID) {
+	    			return $_SESSION['cart']['amount'][$count];
+	    		}
+	    		$count++;
+	    	}
+	    	return 0;
+		}
+		else{
+			return 0;
+		}
+	}
+	else{
+		return 0;
+ 	}
+ }
+
 
 
 

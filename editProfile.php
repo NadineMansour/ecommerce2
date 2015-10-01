@@ -1,3 +1,17 @@
+<?php
+//include config
+require_once('includes/config.php');
+if( !$user->is_logged_in() ){ header('Location: index.php'); }
+
+
+$userQuery = "SELECT * FROM users where username = '". $_SESSION['username'] . "'";
+$result = $db->query($userQuery);
+$row = $result->fetch();
+
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,20 +35,53 @@
 </head>
 
 <body>
+
+     <header>
+        <nav class="navbar navbar-default navbar-fixed-top" style="background: #000;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-target=
+                    "#navbar" data-toggle="collapse" type="button"><span class=
+                    "sr-only">Toggle navigation</span> <span class=
+                    "icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button> <a class=
+                    "navbar-brand" href="">Doola</a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                            <a href="login.php">
+                                <?php
+                                        echo "Hello, " . $_SESSION['username'];
+                                ?>
+                            </a>
+                        </li>
+
+                        <li>
+                            <?php
+                                        echo "<a href='logout.php'> Log out </a>" ;
+                                ?>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header> <br><br>
+
+    <?php
+        if(isset($_POST['submit']))
+        {
+            
+        }
+    ?>
+
     <div class="container">
         <h1>Edit Profile</h1>
         <hr>
 
         <div class="row well">
-            <div class="col-md-3">
-                <div class="text-center">
-                    <img alt="avatar" class="avatar img-circle" src=
-                    "//placehold.it/100">
 
-                    <h6>Upload a different photo...</h6><input class=
-                    "form-control" type="file">
-                </div>
-            </div>
 
             <div class="col-md-9 personal-info">
                 <div class="alert alert-info alert-dismissable">
@@ -46,121 +93,39 @@
 
                 <h3>Personal info</h3>
 
-                <form class="form-horizontal">
+                <form class="form-horizontal" method="post">
+                    
                     <div class="form-group">
-                        <label class="col-lg-3 control-label">First
-                        name:</label>
-
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value=
-                            "Jane">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Last
-                        name:</label>
-
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value=
-                            "Bishop">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Company:</label>
-
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value="">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Email:</label>
-
-                        <div class="col-lg-8">
-                            <input class="form-control" type="text" value=
-                            "janesemail@gmail.com">
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-lg-3 control-label">Time
-                        Zone:</label>
-
-                        <div class="col-lg-8">
-                            <div class="ui-select">
-                                <select class="form-control" id=
-                                "user_time_zone">
-                                    <option value="Hawaii">
-                                        (GMT-10:00) Hawaii
-                                    </option>
-
-                                    <option value="Alaska">
-                                        (GMT-09:00) Alaska
-                                    </option>
-
-                                    <option value=
-                                    "Pacific Time (US &amp; Canada)">
-                                        (GMT-08:00) Pacific Time (US &amp;
-                                        Canada)
-                                    </option>
-
-                                    <option value="Arizona">
-                                        (GMT-07:00) Arizona
-                                    </option>
-
-                                    <option value=
-                                    "Mountain Time (US &amp; Canada)">
-                                        (GMT-07:00) Mountain Time (US &amp;
-                                        Canada)
-                                    </option>
-
-                                    <option selected="selected" value=
-                                    "Central Time (US &amp; Canada)">
-                                        (GMT-06:00) Central Time (US &amp;
-                                        Canada)
-                                    </option>
-
-                                    <option value=
-                                    "Eastern Time (US &amp; Canada)">
-                                        (GMT-05:00) Eastern Time (US &amp;
-                                        Canada)
-                                    </option>
-
-                                    <option value="Indiana (East)">
-                                        (GMT-05:00) Indiana (East)
-                                    </option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Username:</label>
+                        <label class="col-md-3 control-label"><div class="text-left">Username:</div></label>
 
                         <div class="col-md-8">
                             <input class="form-control" type="text" value=
-                            "janeuser">
+                            <?php echo "'" . $row['username'] . "'"?>>
+                        </div>
+                    </div>
+
+                     <div class="form-group">
+                        <label class="col-md-3 control-label"><div class="text-left">email:</div></label>
+
+                        <div class="col-md-8">
+                            <input class="form-control" type="text" value=<?php echo "'" . $row['email'] . "'"?>
+                            >
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Password:</label>
+                        <label class="col-md-3 control-label"><div class="text-left">Password:</div></label>
 
                         <div class="col-md-8">
-                            <input class="form-control" type="password" value=
-                            "11111122333">
+                            <input class="form-control" type="password">
                         </div>
                     </div>
 
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Confirm
-                        password:</label>
+                        <label class="col-md-3 control-label"><div class="text-left">Confirm password:</div></label>
 
                         <div class="col-md-8">
-                            <input class="form-control" type="password" value=
-                            "11111122333">
+                            <input class="form-control" type="password" >
                         </div>
                     </div>
 
@@ -170,7 +135,7 @@
                         <div class="col-md-8">
                             <input class="btn btn-primary" type="button" value=
                             "Save Changes"> <span></span><input class=
-                            "btn btn-default" type="reset" value="Cancel">
+                            "btn btn-default" type="reset" value="Cancel" name="submit">
                         </div>
                     </div>
                 </form>
