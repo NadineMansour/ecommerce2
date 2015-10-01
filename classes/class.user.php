@@ -132,6 +132,40 @@ class User extends Password{
             }
         }
     }
+
+    Public function editUserInfo($user_name, $user_email, $user_password, $card)
+    {
+        $user_name  = trim($user_name);
+        $user_email = trim($user_email);
+        if (empty($user_name)) {
+            $this->errors[] = "Username is empty";
+        }
+        if ($user_password !== $user_password_repeat) {
+            $this->errors[] = "Wrong password confirmation";
+        }
+        if (strlen($user_password) < 6) {
+            $this->errors[] = "Password is too short";
+        }
+        if (strlen($user_name) > 64 || strlen($user_name) < 2) {
+            $this->errors[] = "username should be longer than 2 characters and shorter than 64";
+        }
+        if (!preg_match('/^[a-z\d]{2,64}$/i', $user_name)) {
+            $this->errors[] = "Wrong username format. should contain /^[a-z\d]{2,64}$/i";
+        }
+        if (empty($user_email)) {
+            $this->errors[] = "Email is empty";
+        }
+        if (strlen($user_email) > 64) {
+            $this->errors[] = "Email is too long";
+        }
+        if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+            $this->errors[] = "Invalid Email format";
+        // finally if all the above checks are ok
+        }
+
+           
+
+    }
 	
 }
 

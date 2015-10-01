@@ -72,7 +72,7 @@ $row = $result->fetch();
     <?php
         if(isset($_POST['submit']))
         {
-            
+
         }
     ?>
 
@@ -98,9 +98,9 @@ $row = $result->fetch();
                     <div class="form-group">
                         <label class="col-md-3 control-label"><div class="text-left">Username:</div></label>
 
-                        <div class="col-md-8">
-                            <input class="form-control" type="text" value=
-                            <?php echo "'" . $row['username'] . "'"?>>
+                        <div class="col-md-9">
+                            
+                            <h5><?php echo  $row['username'] ?></h5>
                         </div>
                     </div>
 
