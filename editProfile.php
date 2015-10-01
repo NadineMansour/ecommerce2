@@ -45,7 +45,7 @@ $row = $result->fetch();
                     "sr-only">Toggle navigation</span> <span class=
                     "icon-bar"></span> <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button> <a class=
-                    "navbar-brand" href="">Doola</a>
+                    "navbar-brand" href="index.php">Doola</a>
                 </div>
 
                 <div class="navbar-collapse collapse" id="navbar">
@@ -72,6 +72,42 @@ $row = $result->fetch();
     <?php
         if(isset($_POST['submit']))
         {
+            if(isset($_POST['password']) and isset($_POST['email']) and isset($_POST['passwordConfirm']))
+            {
+                if($_POST['passwordConfirm'] == $_POST['password'])
+                {
+
+                    if(!$user->editUserInfo( $_SESSION['username'], $_POST['email'], $_POST['password'],$_POST['passwordConfirm'], $_POST['cardnumber'])){
+                        $message = "User information updated successfully";
+                        $alert = "<div class='alert alert-info alert-dismissable'>
+                    <a class='panel-close close' data-dismiss='alert'>×</a>
+                    <i class='fa fa-coffee'></i>" .  $message .
+                "</div>";
+                    }
+                    else
+                    {
+                        $message = "Please try again";
+                    $alert = "<div class='alert alert-info alert-dismissable' style='background: #FFCCCC'>
+                    <a class='panel-close close' data-dismiss='alert'>×</a>
+                    <i class='fa fa-coffee'></i>" .  $message .
+                "</div>";
+                    }   
+                }
+                else
+                {
+                    $message = "Passwords donot match. Please try again.";
+                                        $alert = "<div class='alert alert-info alert-dismissable' style='background: #FFCCCC'>
+                    <a class='panel-close close' data-dismiss='alert'>×</a>
+                    <i class='fa fa-coffee'></i>" .  $message .
+                "</div>";
+                }
+                    
+                $alertPanel = $alert;
+            }
+            $userQuery = "SELECT * FROM users where username = '". $_SESSION['username'] . "'";
+            $result = $db->query($userQuery);
+            $row = $result->fetch();
+
 
         }
     ?>
@@ -84,12 +120,12 @@ $row = $result->fetch();
 
 
             <div class="col-md-9 personal-info">
-                <div class="alert alert-info alert-dismissable">
-                    <a class="panel-close close" data-dismiss="alert">×</a>
-                    <i class="fa fa-coffee"></i>This is an
-                    <strong>.alert</strong>. Use this to show important
-                    messages to the user.
-                </div>
+                <?php
+                if(isset($_POST['submit']))
+                {
+                    echo $alertPanel;
+                }
+                ?>
 
                 <h3>Personal info</h3>
 
@@ -108,7 +144,7 @@ $row = $result->fetch();
                         <label class="col-md-3 control-label"><div class="text-left">email:</div></label>
 
                         <div class="col-md-8">
-                            <input class="form-control" type="text" value=<?php echo "'" . $row['email'] . "'"?>
+                            <input class="form-control" name="email" type="text" value=<?php echo "'" . $row['email'] . "'"?>
                             >
                         </div>
                     </div>
@@ -117,7 +153,7 @@ $row = $result->fetch();
                         <label class="col-md-3 control-label"><div class="text-left">Password:</div></label>
 
                         <div class="col-md-8">
-                            <input class="form-control" type="password">
+                            <input class="form-control" name="password" type="password">
                         </div>
                     </div>
 
@@ -125,7 +161,16 @@ $row = $result->fetch();
                         <label class="col-md-3 control-label"><div class="text-left">Confirm password:</div></label>
 
                         <div class="col-md-8">
-                            <input class="form-control" type="password" >
+                            <input class="form-control" name="passwordConfirm" type="password" >
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-md-3 control-label"><div class="text-left">Credit Card:</div></label>
+
+                        <div class="col-md-8">
+                            <input class="form-control" name="cardnumber" type="text" value=<?php echo "'" . $row['cardnumber'] . "'"?>
+                            >
                         </div>
                     </div>
 
@@ -133,9 +178,9 @@ $row = $result->fetch();
                         <label class="col-md-3 control-label"></label>
 
                         <div class="col-md-8">
-                            <input class="btn btn-primary" type="button" value=
-                            "Save Changes"> <span></span><input class=
-                            "btn btn-default" type="reset" value="Cancel" name="submit">
+                            <input class="btn btn-primary" type="submit" value=
+                            "Save Changes" name="submit"> <span></span><input class=
+                            "btn btn-default" type="reset" value="Cancel" >
                         </div>
                     </div>
                 </form>

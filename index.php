@@ -58,6 +58,9 @@ require_once('includes/config.php');
                                    }
                                 ?>
                         </li>
+                        <li>
+                            <a href="store.php"> store </a>
+                        </li>
                     </ul>
                 </div>
             </div>

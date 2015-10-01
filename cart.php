@@ -1,6 +1,7 @@
 <?php
 //include config
 require_once('includes/config.php');
+if( !$user->is_logged_in() ){ header('Location: index.php'); }
 
 //the cart session 
 if (isset($_GET['itm']) && isset($_GET['quan'])) {
