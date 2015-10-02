@@ -60,7 +60,7 @@ $resultm = $db->query($male);
 
 <body>
 
- <nav class="navbar navbar-default navbar-fixed-top" style="background: #000; margin-bottom: 10px;">
+<nav class="navbar navbar-default navbar-fixed-top" style="background: #000; margin-bottom: 10px;">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle collapsed" data-target=
@@ -74,11 +74,11 @@ $resultm = $db->query($male);
                  <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="login.php">
+                            <a href="login.php"> 
                                 <?php
                                    if($user->is_logged_in())
                                    {
-                                        echo $_SESSION['username'];
+                                        echo "Hello, ".$_SESSION['username'];
                                    }
                                    else
                                    {
@@ -100,32 +100,26 @@ $resultm = $db->query($male);
                                    }
                                 ?>
                         </li>
+                        <li>
+                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="border: 0px; background:#000; text-align: left;">Toggle Menu</a>
+                        </li>
+                        <li>
+                            <?php
+                                    if($user->is_logged_in())
+                                    {
+                                        echo "<a href='cart.php'> cart </a>";
+                                    }
+                                    else
+                                    {
+                                        echo "<a href='login.php'> cart </a>";
+                                    }
+                            ?>
+                        </li>
                     </ul>
                 </div>
             </div>
     </nav>
-<div id="wrapper">
-    <!-- Sidebar -->
-    <div id="sidebar-wrapper">
-        <ul class="sidebar-nav">
-            <li class="sidebar-brand">
-                <a href="store.php?gender=f">WOMEN</a>
-            </li>
-            <?php
-            while($rowf = $resultf->fetch()) {
-                echo '<ul><a href=store.php?type=' . $rowf['type'] . '>'.$rowf['type'].'</a></ul>';
-             }
-            ?>
-            <li class="sidebar-brand">
-                <a href="store.php?gender=m">MEN</a>
-            </li>
-            <?php
-                while($rowm = $resultm->fetch()) {
-                    echo '<ul><a href=store.php?type=' . $rowm['type'] . '>'.$rowm['type'].'</a></ul>';
-                }
-            ?>
-        </ul>
-    </div>
+        
 
     <?php  
     if (isset($_GET['item']) && isset($_GET['oper'])) {
@@ -151,6 +145,11 @@ $resultm = $db->query($male);
             }
         }
     }   
+    ?>
+    <?php
+        if(isset($_POST['confirm'])){
+            header('Location: confirmation.php');
+        }
     ?>
 
     <!-- Page Content -->
@@ -189,7 +188,11 @@ $resultm = $db->query($male);
                             }
                             $count++;						
 						}  
+                                            echo "<form role='form' method='post'>
+                        <input class='btn btn-lg btn-success btn-block' type='submit' name='confirm' value='confirm'  /> 
+                    </form>";
                     }
+
                     else{
                         echo "<h1> Your cart is empty.";
                     }

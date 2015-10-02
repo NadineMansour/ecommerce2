@@ -79,7 +79,7 @@ class User extends Password{
         if(empty($firstName)){
             $this->errors[] = "Please write your first name.";
         }
-        if($lastName){
+        if(empty($lastName)){
             $this->errors[] = "Please write your last name.";
         }
         if ($user_password !== $user_password_repeat) {
