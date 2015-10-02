@@ -132,6 +132,41 @@ class User extends Password{
             }
         }
     }
+
+    Public function editUserInfo($user_name, $user_email, $user_password, $user_password_repeat, $card)
+    {
+        $user_name  = trim($user_name);
+        $user_email = trim($user_email);
+        if (empty($user_name)) {
+            $this->errors[] = "Username is empty";
+        }
+        if ($user_password !== $user_password_repeat) {
+            $this->errors[] = "Wrong password confirmation";
+        }
+        if (strlen($user_password) < 6) {
+            $this->errors[] = "Password is too short";
+        }
+        if (strlen($user_name) > 64 || strlen($user_name) < 2) {
+            $this->errors[] = "username should be longer than 2 characters and shorter than 64";
+        }
+        if (empty($user_email)) {
+            $this->errors[] = "Email is empty";
+        }
+        if (strlen($user_email) > 64) {
+            $this->errors[] = "Email is too long";
+        }
+        if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
+            $this->errors[] = "Invalid Email format";
+        }
+        $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
+        $query_edit = $this->_db->prepare("UPDATE Users Set  email = :email , cardnumber = :cardnumber , password = :user_password_hash where username = :username");
+        $query_edit->bindValue(':username', $user_name, PDO::PARAM_STR);
+        $query_edit->bindValue(':user_password_hash', $user_password_hash, PDO::PARAM_STR);
+        $query_edit->bindValue(':email', $user_email, PDO::PARAM_STR);
+        $query_edit->bindValue(':cardnumber', $card, PDO::PARAM_STR);
+        $query_edit->execute();
+        $user_id = $this->_db->lastInsertId();
+    }
 	
 }
 

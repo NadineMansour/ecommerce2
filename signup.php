@@ -36,6 +36,7 @@ require_once('includes/config.php');
 
 <body>
 
+
 	<?php
 
 	//process signup form if submitted
@@ -61,6 +62,54 @@ require_once('includes/config.php');
 	}
 	//end if submit
 	?>
+
+    <header>
+        <nav class="navbar navbar-default navbar-fixed-top" style="background: #000;">
+            <div class="container">
+                <div class="navbar-header">
+                    <button class="navbar-toggle collapsed" data-target=
+                    "#navbar" data-toggle="collapse" type="button"><span class=
+                    "sr-only">Toggle navigation</span> <span class=
+                    "icon-bar"></span> <span class="icon-bar"></span>
+                    <span class="icon-bar"></span></button> <a class=
+                    "navbar-brand" href="index.php">Doola</a>
+                </div>
+
+                <div class="navbar-collapse collapse" id="navbar">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>
+                                <?php
+                                   if($user->is_logged_in())
+                                   {
+                                        echo "<a href='profile.php'>Hello, " . $_SESSION['username'] . "</a>";
+                                   }
+                                   else
+                                   {
+                                        echo"<a href='login.php'>Sign in</a>";
+                                   }
+                                ?>
+                        </li>
+
+                        <li>
+                            <?php
+                                   if($user->is_logged_in())
+                                   {
+                                        echo "<a href='logout.php'> Log out </a>" ;
+                                   }
+                                   else
+                                   {
+                                        echo "<a href='signup.php'> Register </a>";
+                                   }
+                                ?>
+                        </li>
+                        <li>
+                            <a href="store.php"> store </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
 
 	<div class="container">
         <div class="row">
