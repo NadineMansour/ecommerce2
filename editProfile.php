@@ -77,7 +77,7 @@ $row = $result->fetch();
                 if($_POST['passwordConfirm'] == $_POST['password'])
                 {
 
-                    if(!$user->editUserInfo( $_SESSION['username'], $_POST['email'], $_POST['password'],$_POST['passwordConfirm'], $_POST['cardnumber'])){
+                    if(!$user->editUserInfo( $_SESSION['username'], $_POST['email'], $_POST['password'],$_POST['passwordConfirm'], $_POST['cardnumber'], $_POST['firstName'], $_POST['lastName'], $_POST['avatar'])){
                         $message = "User information updated successfully";
                         $alert = "<div class='alert alert-info alert-dismissable'>
                     <a class='panel-close close' data-dismiss='alert'>×</a>
@@ -117,9 +117,21 @@ $row = $result->fetch();
         <hr>
 
         <div class="row well">
+            <form class="form-horizontal" method="post">
+
+            <div class='col-md-2'>
+            <div class='row'>               
+                    <div class="text-center">
+                        <img src=<?php echo $row['avatar'];?> class="avatar img-circle" alt="avatar" style="width:12em; height:12em; margin-bottom:15px;">
+                        <input class="form-control" name="avatar"  type="text" value=<?php echo "'" . $row['avatar'] . "'"?>>
+                    </div>
+                </div>
+            </div>
+            <div class='col-md-1'>
+            </div>
 
 
-            <div class="col-md-9 personal-info">
+            <div class="col-md-9 personal-info" style='border-left-style: solid; border-width: 3px;'>
                 <?php
                 if(isset($_POST['submit']))
                 {
@@ -129,7 +141,7 @@ $row = $result->fetch();
 
                 <h3>Personal info</h3>
 
-                <form class="form-horizontal" method="post">
+                
                     
                     <div class="form-group">
                         <label class="col-md-3 control-label"><div class="text-left">Username:</div></label>
@@ -137,6 +149,22 @@ $row = $result->fetch();
                         <div class="col-md-9">
                             
                             <h5><?php echo  $row['username'] ?></h5>
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-md-3 control-label"><div class="text-left">First Name:</div></label>
+
+                        <div class="col-md-8">
+                            <input class="form-control" name="firstName" type="text" value=<?php echo "'" . $row['firstName'] . "'"?>
+                            >
+                        </div>
+                    </div>
+                     <div class="form-group">
+                        <label class="col-md-3 control-label"><div class="text-left">Last Name:</div></label>
+
+                        <div class="col-md-8">
+                            <input class="form-control" name="lastName" type="text" value=<?php echo "'" . $row['lastName'] . "'"?>
+                            >
                         </div>
                     </div>
 

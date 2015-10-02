@@ -108,7 +108,16 @@ $allItems = mysql_query($shop) or die(mysql_error());
                             <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="border: 0px; background:#000; text-align: left;">Toggle Menu</a>
                         </li>
                         <li>
-                            <a href="cart.php"> cart </a>
+                            <?php
+                                    if($user->is_logged_in())
+                                    {
+                                        echo "<a href='cart.php'> cart </a>";
+                                    }
+                                    else
+                                    {
+                                        echo "<a href='login.php'> cart </a>";
+                                    }
+                            ?>
                         </li>
                     </ul>
                 </div>
