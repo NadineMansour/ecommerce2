@@ -185,7 +185,7 @@ $resultm = $db->query($male);
                                         </div>
                                     </div>
                                 </div>
-                                <?                                  
+                                <?php                                  
                             }
                             $count++;						
 						}  

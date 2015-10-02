@@ -36,7 +36,7 @@ else
 
 
 mysql_connect('localhost','root','');
-mysql_select_db('phpTrail');
+mysql_select_db('mini1');
 
 $allItems = mysql_query($shop) or die(mysql_error());
 ?>
@@ -176,7 +176,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                             <option value="cart.php?quan=4&itm=<?php echo $item['itemID'];?>">4</option>
                                             <option value="cart.php?quan=5&itm=<?php echo $item['itemID'];?>">5</option>
                                             </select>
-                                        <?                                         
+                                        <?php                                         
                                     }
                                     else{
                                         echo "<select  name='items' onchange='location = this.options[this.selectedIndex].value;''>";
@@ -184,7 +184,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                         for ($x = 1; $x <= $item['stock']-Cart:: get_amount($itemID); $x++) {
                                             ?>
                                                 <option value="cart.php?quan=<?php echo $x;?>&itm=<?php echo $item['itemID'];?>"><?php echo $x;?></option>;
-                                            <?
+                                            <?php
                                         }
                                         echo "</select>";
                                     } 

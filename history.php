@@ -154,7 +154,7 @@ $resultm = $db->query($male);
 	                            	</div>
 		                        </div>
 		                    </div>
-	                        <?	
+	                        <?php	
 	                    $count++;					
                     }
                     if ($count == 0) {
@@ -162,7 +162,7 @@ $resultm = $db->query($male);
 		                    <div class="col-sm-4 col-lg-4 col-md-4">
 		                    	<h1>You have no purchases.</h1>
 		                    </div>
-	                        <?	
+	                        <?php	
                     }
                     ?> 
                 </div>
