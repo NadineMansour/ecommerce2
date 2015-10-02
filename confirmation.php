@@ -7,6 +7,8 @@ if(isset($_SESSION['cart']))
 	$count = 0 ;
 	while($count < sizeof($_SESSION['cart']['name']))
 	{
+		if($_SESSION['cart']['amount'][$count] > 0)
+		{
 			$requied_amount = $_SESSION['cart']['amount'][$count];
 			$current_id = $_SESSION['cart']['itemID'][$count];
 
@@ -26,7 +28,7 @@ if(isset($_SESSION['cart']))
 					echo "select amount less than that in the stock ".$raw['stock']."<br>";
 				}
 			}
-
+		}
 		$count++;
 
 	}
@@ -61,7 +63,8 @@ else
 		$count = 0;
 		while($count < sizeof($_SESSION['cart']['name']))
 		{
-			
+			if($_SESSION['cart']['amount'][$count] > 0)
+			{
 				$current_itemID = $_SESSION['cart']['itemID'][$count];
 				$current_amount = $_SESSION['cart']['amount'][$count];
 
@@ -77,7 +80,7 @@ else
 
 				$stock_update_query = "UPDATE items  SET stock = $new_stock WHERE itemID = $current_itemID";
 				$exe = $db->query($stock_update_query);
-			
+			}
 
 			$count++;
 		}
