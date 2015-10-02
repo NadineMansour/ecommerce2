@@ -6,7 +6,7 @@ session_start();
 define('DBHOST','localhost');
 define('DBUSER','root');
 define('DBPASS','');
-define('DBNAME','mini1');
+define('DBNAME','phpTrail');
 
 $db = new PDO("mysql:host=".DBHOST.";port=3306;dbname=".DBNAME, DBUSER, DBPASS);
 $db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

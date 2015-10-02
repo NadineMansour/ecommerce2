@@ -144,7 +144,7 @@ $row = $result->fetch();
                 <div class="row">
                     <div class="col-md-3">
 
-                        <div class="text-center"><a href="#" class="text-right"> previous orders</a></div>
+                        <div class="text-center"><a href="history.php" class="text-right"> previous orders</a></div>
                     </div>
                 </div>
             </div>

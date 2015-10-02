@@ -33,7 +33,7 @@ $resultm = $db->query($male);
                     "sr-only">Toggle navigation</span> <span class=
                     "icon-bar"></span> <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button> <a class=
-                    "navbar-brand" href="">Doola</a>
+                    "navbar-brand" href=""><img src='https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png' style='width: 30px; height: 30px;'></a>
                 </div>
 
                 <div class="navbar-collapse collapse" id="navbar">

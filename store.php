@@ -36,7 +36,7 @@ else
 
 
 mysql_connect('localhost','root','');
-mysql_select_db('mini1');
+mysql_select_db('phpTrail');
 
 $allItems = mysql_query($shop) or die(mysql_error());
 ?>
