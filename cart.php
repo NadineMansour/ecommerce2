@@ -159,33 +159,34 @@ $resultm = $db->query($male);
             <div class="col-md-9">
                 <div class="row">
                 	<?php
-                    if (isset($_SESSION['cart'])) {
-                    
+                    if (isset($_SESSION['cart'])) {                    
                         $count=0;
 						while ($count< sizeof($_SESSION['cart']['name'])) {
-	                        ?> 
-		                    <div class="col-sm-4 col-lg-4 col-md-4">
-		                        <div class="thumbnail">
-                                    <?php
-                                        echo "<img alt='' src='" . $_SESSION['cart']['url'][$count] . "'style='border-radius: 25px; border: 2px;'><br>";
-                                    ?>
-		                            <div class="caption">
-		                                <?php
-		                                echo "<h5 class='pull-right'>".$_SESSION['cart']['price'][$count]."$</h5>";
-		                                echo "<h5>".$_SESSION['cart']['name'][$count]."</h5>";
-		                                echo "type - ".$_SESSION['cart']['type'][$count];
-                                        echo "<h5 class='pull-right'> #".$_SESSION['cart']['amount'][$count]."</h5>";
-                                        $plus = "p".$count;
-                                        $minus = "m".$count;
-                                        echo "</br>";
-                                        echo "</br>";
-                                        echo "<a class='btn btn-danger btn-circle btn-m fa fa-plus' href=cart.php?oper=p&item=",urlencode($count),"></a>";
-                                        echo "<a class='btn btn-danger btn-circle btn-m fa fa-minus' href=cart.php?oper=m&item=",urlencode($count),"></a>";
-		                                ?>                                      
-	                            	</div>
-		                        </div>
-		                    </div>
-	                        <?	
+                            if ($_SESSION['cart']['amount'][$count]) {
+                                ?> 
+                                <div class="col-sm-4 col-lg-4 col-md-4">
+                                    <div class="thumbnail">
+                                        <?php
+                                            echo "<img alt='' src='" . $_SESSION['cart']['url'][$count] . "'style='border-radius: 25px; border: 2px;'><br>";
+                                        ?>
+                                        <div class="caption">
+                                            <?php
+                                            echo "<h5 class='pull-right'>".$_SESSION['cart']['price'][$count]."$</h5>";
+                                            echo "<h5>".$_SESSION['cart']['name'][$count]."</h5>";
+                                            echo "type - ".$_SESSION['cart']['type'][$count];
+                                            echo "<h5 class='pull-right'> #".$_SESSION['cart']['amount'][$count]."</h5>";
+                                            $plus = "p".$count;
+                                            $minus = "m".$count;
+                                            echo "</br>";
+                                            echo "</br>";
+                                            echo "<a class='btn btn-danger btn-circle btn-m fa fa-plus' href=cart.php?oper=p&item=",urlencode($count),"></a>";
+                                            echo "<a class='btn btn-danger btn-circle btn-m fa fa-minus' href=cart.php?oper=m&item=",urlencode($count),"></a>";
+                                            ?>                                      
+                                        </div>
+                                    </div>
+                                </div>
+                                <?                                  
+                            }
                             $count++;						
 						}  
                     }
