@@ -105,7 +105,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                 ?>
                         </li>
                         <li>
-                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="border: 0px; background:#000;">Toggle Menu</a>
+                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="border: 0px; background:#000; text-align: left;">Toggle Menu</a>
                         </li>
                         <li>
                             <a href="cart.php"> cart </a>

@@ -1,7 +1,12 @@
 <?php
 //include config
 require_once('includes/config.php');
- 
+
+$female = "SELECT DISTINCT type FROM items WHERE gender='f'";
+$resultf = $db->query($female);
+
+$male = "SELECT DISTINCT type FROM items WHERE gender='m'";
+$resultm = $db->query($male);
 ?>
 
 <!DOCTYPE html>
@@ -79,46 +84,26 @@ require_once('includes/config.php');
                 <h1 class="text-center">Men</h1><br><br>
             </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 1</a>
-                        </h2>
-                    </div>
+            <?php
+                $counter = 0;
+                while($rowm = $resultm->fetch()) {
+                    if($counter % 3 == 0 )
+                    {
+                        echo"<div class='container'>
+                            <div class='row'>";
+                    }
+                    echo "<div class='col-lg-4 col-md-4 col-sm-6'>
+                                <h2 class='text-center'>";
+                    echo '<a href=store.php>'.$rowm['type'].'</a></h2></div>';
+                    if($counter%3==0 and $counter > 0)
+                    {
+                        echo "</div></div><br><br><br><br>";
+                    }
+                    $counter++;
 
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 2</a>
-                        </h2>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 3</a>
-                        </h2>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 4</a>
-                        </h2>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Deparment 5</a>
-                        </h2>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 6</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
+                }
+            ?>
+           
         </div>
     </section>
 
@@ -128,46 +113,26 @@ require_once('includes/config.php');
                 <h1 class="text-center">Women</h1><br><br>
             </div>
 
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 1</a>
-                        </h2>
-                    </div>
+             <?php
+                $counterf = 0;
+                while($rowf = $resultf->fetch()) {
+                    if($counterf % 3 ==0 )
+                    {
+                        echo"<div class='container'>
+                            <div class='row'>";
+                    }
+                    echo "<div class='col-lg-4 col-md-4 col-sm-6'>
+                                <h2 class='text-center'>";
+                    echo '<a href=index.php>'.$rowf['type'].'</a></h2></div>';
+                    if($counterf%3==0 and $counter > 0)
+                    {
+                        echo "</div></div><br>";
+                    }
+                    $counterf++;
 
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 2</a>
-                        </h2>
-                    </div>
-
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 3</a>
-                        </h2>
-                    </div>
-                </div>
-            </div><br>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 4</a>
-                        </h2>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Deparment 5</a>
-                        </h2>
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-6">
-                        <h2 class="text-center">
-                            <a href="store.php">Department 6</a>
-                        </h2>
-                    </div>
-                </div>
-            </div>
+                }
+            ?>
+          
         </div>
     </section>
 
