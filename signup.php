@@ -47,8 +47,10 @@ require_once('includes/config.php');
 		$confirm = trim($_POST['confirmP']);
 		$email = trim($_POST['email']);
 		$card = trim($_POST['cardnumber']);
+        $firstName = trim($_POST['firstName']);
+        $lastName = trim($_POST['lastName']);
 		
-		if($user->registerNewUser($username,$email,$password,$confirm,$card)){ 
+		if($user->registerNewUser($username,$email,$password,$confirm,$card,$firstName,$lastName)){ 
 
 			//logged in return to index page
 			header('Location: index.php');
@@ -121,6 +123,12 @@ require_once('includes/config.php');
                     <div class="panel-body">
                         <form role="form" method="post">
                             <fieldset>
+                                <div class='form-group'>
+                                    <input class='form-control' placeholder='First Name' name='firstName' type='firstName' autofocus>
+                                </div>
+                                <div class='form-group'>
+                                    <input class='form-control' placeholder='Last Name' name='lastName' type='lastName' autofocus>
+                                </div>
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Username" name="username" type="username" autofocus>
                                 </div>
@@ -136,6 +144,7 @@ require_once('includes/config.php');
                                 <div class="form-group">
                                     <input class="form-control" placeholder="Card Number" name="cardnumber" type="text" autofocus>
                                 </div>
+                                
                                 <?php 
 									foreach ($user->getErrors() as $error)
 										echo "<h6 class='error'>".$error."</h6>";

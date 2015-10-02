@@ -86,7 +86,15 @@ $row = $result->fetch();
                 
             </div><br>
 
-
+            <div class='row'>
+                <div class='col-md-3'>
+                    <div class='row'>               
+                    <div class="text-center">
+                        <img src=<?php echo $row['avatar'];?> class="avatar img-circle" alt="avatar" style="width:12em; height:12em;">
+                    </div>
+                </div>
+                </div>
+                <div class='col-md-9'>
             <div class="row well">
                 <div class="row">
                     <div class="col-md-3">
@@ -101,6 +109,23 @@ $row = $result->fetch();
                         </button>
                     </div>
                 </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="text-center">First Name:</p>
+                    </div>
+                    <div class="col-md-9">
+                        <p class=""><?php echo $row['firstName']; ?></p>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <p class="text-center">Last Name:</p>
+                    </div>
+                    <div class="col-md-9">
+                        <p class=""><?php echo $row['lastName']; ?></p>
+                    </div>
+                </div>
+
                 <div class="row">
                     <div class="col-md-3">
                         <p class="text-center">email:</p>
@@ -122,8 +147,9 @@ $row = $result->fetch();
                         <div class="text-center"><a href="#" class="text-right"> previous orders</a></div>
                     </div>
                 </div>
-                
             </div>
+        </div>
+        </div>
             <script type="text/JavaScript">
                 document.getElementById("edit").onclick = function () {
                 location.href = "editProfile.php";

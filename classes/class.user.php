@@ -61,11 +61,13 @@ class User extends Password{
      * handles the entire registration process. checks all error possibilities, and creates a new user in the database if
      * everything is fine
      */
-    public function registerNewUser($user_name, $user_email, $user_password, $user_password_repeat, $card)
+    public function registerNewUser($user_name, $user_email, $user_password, $user_password_repeat, $card, $firstName, $lastName)
     {
         // we just remove extra space on username and email
         $user_name  = trim($user_name);
         $user_email = trim($user_email);
+        $firstName = trim($firstName);
+        $lastName = trim($lastName);
         // check provided data validity
         // TODO: check for "return true" case early, so put this first
         if (empty($user_name)) {
@@ -73,6 +75,12 @@ class User extends Password{
         }
         if (empty($user_password) || empty($user_password_repeat)) {
             $this->errors[] = "Password is empty";
+        }
+        if(empty($firstName)){
+            $this->errors[] = "Please write your first name.";
+        }
+        if($lastName){
+            $this->errors[] = "Please write your last name.";
         }
         if ($user_password !== $user_password_repeat) {
             $this->errors[] = "Wrong password confirmation";
@@ -112,8 +120,10 @@ class User extends Password{
             } else {
                 $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
                 // write new users data into database
-                $query_new_user_insert = $this->_db->prepare('INSERT INTO users (username, password, email, cardnumber) VALUES(:user_name, :user_password_hash, :user_email, :user_card)');
+                $query_new_user_insert = $this->_db->prepare('INSERT INTO users (username, password, email, cardnumber, firstName, lastName) VALUES(:user_name, :user_password_hash, :user_email, :user_card, :firstName, :lastName)');
                 $query_new_user_insert->bindValue(':user_name', $user_name, PDO::PARAM_STR);
+                $query_new_user_insert->bindValue(':firstName', $firstName, PDO::PARAM_STR);
+                $query_new_user_insert->bindValue(':lastName', $lastName, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_password_hash', $user_password_hash, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_email', $user_email, PDO::PARAM_STR);
                 $query_new_user_insert->bindValue(':user_card', $card, PDO::PARAM_STR);
@@ -133,7 +143,7 @@ class User extends Password{
         }
     }
 
-    Public function editUserInfo($user_name, $user_email, $user_password, $user_password_repeat, $card)
+    Public function editUserInfo($user_name, $user_email, $user_password, $user_password_repeat, $card, $firstName, $lastName, $avatar)
     {
         $user_name  = trim($user_name);
         $user_email = trim($user_email);
@@ -159,8 +169,11 @@ class User extends Password{
             $this->errors[] = "Invalid Email format";
         }
         $user_password_hash = password_hash($user_password, PASSWORD_DEFAULT);
-        $query_edit = $this->_db->prepare("UPDATE Users Set  email = :email , cardnumber = :cardnumber , password = :user_password_hash where username = :username");
+        $query_edit = $this->_db->prepare("UPDATE Users Set  email = :email , cardnumber = :cardnumber , password = :user_password_hash, firstName = :firstName, lastName = :lastName , avatar = :avatar where username = :username");
         $query_edit->bindValue(':username', $user_name, PDO::PARAM_STR);
+        $query_edit->bindValue(':firstName', $firstName, PDO::PARAM_STR);
+        $query_edit->bindValue(':lastName', $lastName, PDO::PARAM_STR);
+        $query_edit->bindValue(':avatar', $avatar, PDO::PARAM_STR);
         $query_edit->bindValue(':user_password_hash', $user_password_hash, PDO::PARAM_STR);
         $query_edit->bindValue(':email', $user_email, PDO::PARAM_STR);
         $query_edit->bindValue(':cardnumber', $card, PDO::PARAM_STR);
