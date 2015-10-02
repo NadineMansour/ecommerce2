@@ -158,10 +158,10 @@ $resultm = $db->query($male);
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
-                	<?php
+                    <?php
                     if (isset($_SESSION['cart'])) {                    
                         $count=0;
-						while ($count< sizeof($_SESSION['cart']['name'])) {
+                        while ($count< sizeof($_SESSION['cart']['name'])) {
                             if ($_SESSION['cart']['amount'][$count]) {
                                 ?> 
                                 <div class="col-sm-4 col-lg-4 col-md-4">
@@ -187,8 +187,8 @@ $resultm = $db->query($male);
                                 </div>
                                 <?php                                  
                             }
-                            $count++;						
-						}  
+                            $count++;                       
+                        }  
                     }
                     else{
                         echo "<h1> Your cart is empty.";

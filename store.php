@@ -36,7 +36,7 @@ else
 
 
 mysql_connect('localhost','root','');
-mysql_select_db('phpTrail');
+mysql_select_db('mini1');
 
 $allItems = mysql_query($shop) or die(mysql_error());
 ?>
@@ -172,7 +172,14 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                     echo "<img alt='' src='" . $item['url']. "'style='border-radius: 25px; border: 2px;'><br>";
                                     echo "<h5 class='pull-right' >$" . $item['price']. ".00"."</h5>";
                                     echo "<div class='caption' style='border-top: 1px solid #ccc;'><h5>".$item['name']."</h5>";
-                                    echo "<h5>Stock: ". $item['stock']."</h5>";
+                                    if($item['stock'] != 0)
+                                    {
+                                        echo "<h5>Stock: ". $item['stock']."</h5>";
+                                    }
+                                    else
+                                    {
+                                         echo "<h5>item out of stock"."</h5>";
+                                    }
                                     echo "<h6>Add to cart</h6>";
                                     $itemID = $item['itemID'];
                                     if ($item['stock'] - Cart:: get_amount($itemID) >= 5) {
@@ -185,7 +192,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                             <option value="cart.php?quan=4&itm=<?php echo $item['itemID'];?>">4</option>
                                             <option value="cart.php?quan=5&itm=<?php echo $item['itemID'];?>">5</option>
                                             </select>
-                                        <?                                         
+                                        <?php                                         
                                     }
                                     else{
                                         echo "<select  name='items' onchange='location = this.options[this.selectedIndex].value;''>";
@@ -193,7 +200,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
                                         for ($x = 1; $x <= $item['stock']-Cart:: get_amount($itemID); $x++) {
                                             ?>
                                                 <option value="cart.php?quan=<?php echo $x;?>&itm=<?php echo $item['itemID'];?>"><?php echo $x;?></option>;
-                                            <?
+                                            <?php
                                         }
                                         echo "</select>";
                                     } 
