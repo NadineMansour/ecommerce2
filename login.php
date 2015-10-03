@@ -18,7 +18,7 @@ if( $user->is_logged_in() ){ header('Location: index.php'); }
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin 2 - Sign in form</title>
+    <title>Login</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">

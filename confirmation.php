@@ -11,7 +11,7 @@ require_once('includes/config.php');
     <meta content="IE=edge" http-equiv="X-UA-Compatible">
     <meta content="width=device-width, initial-scale=1" name="viewport">
 
-    <title>Cool Desgins</title>
+    <title>Confirm purchase</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 
@@ -52,12 +52,13 @@ require_once('includes/config.php');
                 $count++;
             }
             unset($_SESSION['cart']);
+            $_SESSION['purchase'] = true;
             header('location: index.php');
             
         }
     ?>
 
-    <nav class="navbar navbar-default navbar-fixed-top" style="background: #000; margin-bottom: 20px;">
+    <nav class="navbar navbar-default navbar-fixed-top" style="background: #000;">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle collapsed" data-target=
@@ -65,24 +66,22 @@ require_once('includes/config.php');
                     "sr-only">Toggle navigation</span> <span class=
                     "icon-bar"></span> <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button> <a class=
-                    "navbar-brand" href="index.php">Doola</a>
+                    "navbar-brand" href=""><img src='https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png' style='width: 30px; height: 30px;'></a>
                 </div>
 
-                 <div class="navbar-collapse collapse" id="navbar">
+                <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="login.php">
                                 <?php
                                    if($user->is_logged_in())
                                    {
-                                        echo $_SESSION['username'];
+                                        echo "<a href='profile.php'>Hello, " . $_SESSION['username'] . "</a>";
                                    }
                                    else
                                    {
-                                        echo"Sign in";
+                                        echo"<a href='login.php'>Sign in</a>";
                                    }
                                 ?>
-                            </a>
                         </li>
 
                         <li>
@@ -97,10 +96,15 @@ require_once('includes/config.php');
                                    }
                                 ?>
                         </li>
+                        <li>
+                            <a href="store.php"> store </a>
+                        </li>
                     </ul>
                 </div>
             </div>
-    </nav><br><br><br><br>
+        </nav><br><br><br><br>
+
+
 
     <div class="container">
         <div class="row">

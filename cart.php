@@ -33,7 +33,7 @@ $resultm = $db->query($male);
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Shop Homepage - Start Bootstrap Template</title>
+    <title>Shopping cart</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -56,19 +56,19 @@ $resultm = $db->query($male);
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
 </head>
 
 <body>
 
-<nav class="navbar navbar-default navbar-fixed-top" style="background: #000; margin-bottom: 10px;">
+ <nav class="navbar navbar-default navbar-fixed-top" style="background: #000; margin-bottom: 10px;">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle collapsed" data-target=
                     "#navbar" data-toggle="collapse" type="button"><span class=
                     "sr-only">Toggle navigation</span> <span class=
                     "icon-bar"></span> <span class="icon-bar"></span>
-                    <span class="icon-bar"></span></button> <a class=
-                    "navbar-brand" href="index.php">Doola</a>
+                    <span class="icon-bar"></span></button> <a class="navbar-brand" href="index.php"><img src='https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png' style='width: 30px; height: 30px;'></a>
                 </div>
 
                  <div class="navbar-collapse collapse" id="navbar">
@@ -101,7 +101,7 @@ $resultm = $db->query($male);
                                 ?>
                         </li>
                         <li>
-                            <a href="#menu-toggle" class="btn btn-default" id="menu-toggle" style="border: 0px; background:#000; text-align: left;">Toggle Menu</a>
+                            
                         </li>
                         <li>
                             <?php
@@ -119,6 +119,9 @@ $resultm = $db->query($male);
                 </div>
             </div>
     </nav>
+
+         <!-- Sidebar -->
+
         
 
     <?php  
@@ -151,7 +154,28 @@ $resultm = $db->query($male);
             header('Location: confirmation.php');
         }
     ?>
+ <div id="wrapper">
+     <div id="sidebar-wrapper">
+            <ul class="sidebar-nav">
+                <li class="sidebar-brand">
+                    <a href="store.php?gender=f">WOMEN</a>
+                </li>
+                <?php
+                while($rowf = $resultf->fetch()) {
+                    echo '<ul><a href=store.php?type=' . $rowf['type'] . '>'.$rowf['type'].'</a></ul>';
+                 }
+                ?>
 
+                <li class="sidebar-brand">
+                    <a href="store.php?gender=m">MEN</a>
+                </li>
+                <?php
+                    while($rowm = $resultm->fetch()) {
+                        echo '<ul><a href=store.php?type=' . $rowm['type'] . '>'.$rowm['type'].'</a></ul>';
+                    }
+                ?>
+            </ul>
+        </div>
     <!-- Page Content -->
     <div class="container">
         <div class="row">
@@ -178,7 +202,7 @@ $resultm = $db->query($male);
                                             $minus = "m".$count;
                                             echo "</br>";
                                             echo "</br>";
-                                            echo "<a class='btn btn-danger btn-circle btn-m fa fa-plus' href=cart.php?oper=p&item=",urlencode($count),"></a>";
+                                            echo "<a class='btn btn-danger btn-circle btn-m fa fa-plus'  href=cart.php?oper=p&item=",urlencode($count),"></a>";
                                             echo "<a class='btn btn-danger btn-circle btn-m fa fa-minus' href=cart.php?oper=m&item=",urlencode($count),"></a>";
                                             ?>                                      
                                         </div>
@@ -206,6 +230,7 @@ $resultm = $db->query($male);
 
     </div>
 </div>
+</div>
     <!-- /.container -->
     <!-- /.container -->
 
@@ -214,6 +239,13 @@ $resultm = $db->query($male);
 
     <!-- Bootstrap Core JavaScript -->
     <script src="js/bootstrap.min.js"></script>
+    <script>
+    $("#menu-toggle").click(function(e) {
+        e.preventDefault();
+        $("#wrapper").toggleClass("toggled");
+    });
+    </script>
+
 
 </body>
 

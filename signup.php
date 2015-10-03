@@ -12,7 +12,7 @@ require_once('includes/config.php');
   <link rel="stylesheet" href="style/normalize.css">
   <link rel="stylesheet" href="style/main.css">
 
-  <title>SB Admin 2 - Sign up form</title>
+  <title>Registeration</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -23,6 +23,7 @@ require_once('includes/config.php');
     <!-- Custom CSS -->
     <link href="dist/css/sb-admin-2.css" rel="stylesheet">
 
+
     <!-- Custom Fonts -->
     <link href="bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -32,6 +33,7 @@ require_once('includes/config.php');
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
 </head>
 
 <body>
@@ -113,6 +115,10 @@ require_once('includes/config.php');
         </nav>
     </header>
 
+
+
+
+
 	<div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4">
@@ -170,6 +176,7 @@ require_once('includes/config.php');
 
     <!-- Custom Theme JavaScript -->
     <script src="dist/js/sb-admin-2.js"></script>
+    <script src='js/confirm.js'></script>
 
 </body>
 </html>

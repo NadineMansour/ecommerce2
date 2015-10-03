@@ -21,6 +21,15 @@ $resultm = $db->query($male);
     <title>Cool Desgins</title>
     <link href="css/bootstrap.min.css" rel="stylesheet">
     <link href="css/doola.css" rel="stylesheet">
+    <link href="css/confirm.css" rel="stylesheet">
+    <script src=
+    "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script src="js/bootstrap.min.js"></script> <script src="js/Animation.js"></script>
+    <script>
+function myFunctionModal()
+{
+    $('div.modal').removeClass('display');
+}
+</script>
 </head>
 
 <body>
@@ -73,10 +82,30 @@ $resultm = $db->query($male);
 
         <div class="jumbotron jumbotronBanner">
             <div class="container">
-                <h1 class="text-center">Yollo !!</h1>
+                <h1 class="text-center"></h1>
             </div>
         </div>
     </header>
+
+    
+<?php
+        if(isset($_SESSION['purchase']))
+        {
+            echo "<div class='modal fade bs-example-modal-lg in display' id='myModal' tabindex='-1' aria-hidden='false' >
+                <div class='modal-dialog modal-lg'>
+                    <div class='modal-content'>
+                              <div class='modal-header'>
+        <button type='button' class='close' data-dismiss='modal' aria-label='Close' onclick='myFunctionModal()'><span aria-hidden='true'>&times;</span></button></div>
+                        <div class='modal-body'>
+                            <h2>Your Order has been confirmed</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>";
+        }
+?>
+    
+
 
 <section>
         <div class="jumbotron men">
@@ -136,50 +165,10 @@ $resultm = $db->query($male);
         </div>
     </section>
 
- <section>
-   <div class="jumbotron foot container">
-        <div class="row">
-            <div class="col-md-12">
-                <p class="text-center footer-text">About us.</p>
-            </div>
-        </div>
 
-   </div>
-</section>
 
-<footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <span class="copyright">Copyright © Yasta</span>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline social-buttons">
-                        <li><a href="#"><i class="fa fa-twitter"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-facebook"></i></a>
-                        </li>
-                        <li><a href="#"><i class="fa fa-linkedin"></i></a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="col-md-4">
-                    <ul class="list-inline quicklinks">
-                        <li><a href="#">Contact us</a>
-                        </li>
-                        <li><a href="#">Privacy Policy</a>
-                        </li>
-                        <li><a href="#">Terms of Use</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </footer>
 
-  
+     
 
-<script src=
-    "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script src="js/bootstrap.min.js"></script> <script src="js/Animation.js"></script>
 </body>
 </html>

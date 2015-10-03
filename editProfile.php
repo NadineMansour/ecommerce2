@@ -23,7 +23,7 @@ $row = $result->fetch();
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>profile</title>
+    <title>Profile</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -31,13 +31,14 @@ $row = $result->fetch();
 
     <!-- Custom CSS -->
 
+
 </head>
 </head>
 
 <body>
 
      <header>
-        <nav class="navbar navbar-default navbar-fixed-top" style="background: #000;">
+<nav class="navbar navbar-default navbar-fixed-top" style="background: #000;">
             <div class="container">
                 <div class="navbar-header">
                     <button class="navbar-toggle collapsed" data-target=
@@ -45,23 +46,38 @@ $row = $result->fetch();
                     "sr-only">Toggle navigation</span> <span class=
                     "icon-bar"></span> <span class="icon-bar"></span>
                     <span class="icon-bar"></span></button> <a class=
-                    "navbar-brand" href="index.php">Doola</a>
+                    "navbar-brand" href="index.php"><img src='https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png' style='width: 30px; height: 30px;'></a>
                 </div>
 
                 <div class="navbar-collapse collapse" id="navbar">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <a href="login.php">
                                 <?php
-                                        echo "Hello, " . $_SESSION['username'];
+                                   if($user->is_logged_in())
+                                   {
+                                        echo "<a href='profile.php'>Hello, " . $_SESSION['username'] . "</a>";
+                                   }
+                                   else
+                                   {
+                                        echo"<a href='login.php'>Sign in</a>";
+                                   }
                                 ?>
-                            </a>
                         </li>
 
                         <li>
                             <?php
+                                   if($user->is_logged_in())
+                                   {
                                         echo "<a href='logout.php'> Log out </a>" ;
+                                   }
+                                   else
+                                   {
+                                        echo "<a href='signup.php'> Register </a>";
+                                   }
                                 ?>
+                        </li>
+                        <li>
+                            <a href="store.php"> store </a>
                         </li>
                     </ul>
                 </div>
@@ -112,7 +128,7 @@ $row = $result->fetch();
         }
     ?>
 
-    <div class="container">
+    <div class="container" >
         <h1>Edit Profile</h1>
         <hr>
 

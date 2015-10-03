@@ -52,7 +52,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Simple Sidebar - Start Bootstrap Template</title>
+    <title>Store</title>
 
     <!-- Bootstrap Core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -71,8 +71,7 @@ $allItems = mysql_query($shop) or die(mysql_error());
                     "#navbar" data-toggle="collapse" type="button"><span class=
                     "sr-only">Toggle navigation</span> <span class=
                     "icon-bar"></span> <span class="icon-bar"></span>
-                    <span class="icon-bar"></span></button> <a class=
-                    "navbar-brand" href="index.php">Doola</a>
+                    <span class="icon-bar"></span></button> <a class="navbar-brand" href="index.php"><img src='https://upload.wikimedia.org/wikipedia/commons/3/33/Vanamo_Logo.png' style='width: 30px; height: 30px;'></a>
                 </div>
 
                  <div class="navbar-collapse collapse" id="navbar">
