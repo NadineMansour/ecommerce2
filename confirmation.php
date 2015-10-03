@@ -16,7 +16,6 @@ require_once('includes/config.php');
 </head>
 
 <body>
-<<<<<<< HEAD
     <?php
         if(isset($_POST['confirm']))
         {
