@@ -16,6 +16,7 @@ require_once('includes/config.php');
 </head>
 
 <body>
+<<<<<<< HEAD
     <?php
         if(isset($_POST['confirm']))
         {
@@ -205,5 +206,6 @@ require_once('includes/config.php');
         </div>
     </div><script src=
     "https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> <script src="js/bootstrap.min.js"></script> <script src="js/Animation.js"></script>
+
 </body>
 </html>

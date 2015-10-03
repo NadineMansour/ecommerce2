@@ -68,43 +68,76 @@ class User extends Password{
         $user_email = trim($user_email);
         $firstName = trim($firstName);
         $lastName = trim($lastName);
+        $cardnumber = trim($card);
+        $flag = True;
         // check provided data validity
         // TODO: check for "return true" case early, so put this first
         if (empty($user_name)) {
             $this->errors[] = "Username is empty";
+            $flag = False;
         }
         if (empty($user_password) || empty($user_password_repeat)) {
             $this->errors[] = "Password is empty";
+            $flag = False;
         }
         if(empty($firstName)){
             $this->errors[] = "Please write your first name.";
+            $flag = False;
         }
         if(empty($lastName)){
             $this->errors[] = "Please write your last name.";
+            $flag = False;
         }
         if ($user_password !== $user_password_repeat) {
             $this->errors[] = "Wrong password confirmation";
+            $flag = False;
         }
         if (strlen($user_password) < 6) {
             $this->errors[] = "Password is too short";
+            $flag = False;
         }
         if (strlen($user_name) > 64 || strlen($user_name) < 2) {
             $this->errors[] = "username should be longer than 2 characters and shorter than 64";
+            $flag = False;
         }
         if (!preg_match('/^[a-z\d]{2,64}$/i', $user_name)) {
             $this->errors[] = "Wrong username format. should contain /^[a-z\d]{2,64}$/i";
+            $flag = False;
         }
         if (empty($user_email)) {
             $this->errors[] = "Email is empty";
+            $flag = False;
         }
         if (strlen($user_email) > 64) {
             $this->errors[] = "Email is too long";
+            $flag = False;
         }
         if (!filter_var($user_email, FILTER_VALIDATE_EMAIL)) {
             $this->errors[] = "Invalid Email format";
+            $flag = False;
         // finally if all the above checks are ok
         }
-        if ($this->_db) {
+        $numCount = 0;
+        $num =(int) $cardnumber;
+        while($num > 0)
+        {
+            if($num > 0)
+            {
+                $numCount++;
+                $num =(int) $num/10;
+            }
+        }
+        if($numCount < 0)
+        {
+            $this->errors[] = "card Number must be 20 integers";
+            $flag = False;
+        }
+        if(!is_numeric($num))
+        {
+            $this->errors[] = "card Number cannot contain chars";   
+            $flag = False;
+        }
+        if ($this->_db && $flag) {
             // check if username or email already exists
             $query_check_user_name = $this->_db->prepare('SELECT username, email FROM users WHERE username=:user_name OR email=:user_email');
             $query_check_user_name->bindValue(':user_name', $user_name, PDO::PARAM_STR);

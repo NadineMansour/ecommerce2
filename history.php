@@ -126,43 +126,43 @@ $resultm = $db->query($male);
         <div class="row">
             <div class="col-md-9">
                 <div class="row">
-                	<?php
-                	$count = 0;
-					while($row = $result->fetch()) {
-						$itemID = $row['itemId'];
+                    <?php
+                    $count = 0;
+                    while($row = $result->fetch()) {
+                        $itemID = $row['itemId'];
 
-						$sqlitem = "SELECT * FROM items WHERE itemID='$itemID'";
-						$item = $db->query($sqlitem)->fetch();
-						$item_name = $item['name'];
-						$url = $item['url'];
-						$quantity =  $row['quantity'];
-						$total_price = $quantity * $item['price'];
-						$date = $row['date'];
-	                        ?>
-		                    <div class="col-sm-4 col-lg-4 col-md-4">
-		                        <div class="thumbnail">
+                        $sqlitem = "SELECT * FROM items WHERE itemID='$itemID'";
+                        $item = $db->query($sqlitem)->fetch();
+                        $item_name = $item['name'];
+                        $url = $item['url'];
+                        $quantity =  $row['quantity'];
+                        $total_price = $quantity * $item['price'];
+                        $date = $row['date'];
+                            ?>
+                            <div class="col-sm-4 col-lg-4 col-md-4">
+                                <div class="thumbnail">
                                     <?php
                                         echo "<img alt='' src='" . $url . "'style='border-radius: 25px; border: 2px;'><br>";
                                     ?>
-		                            <div class="caption">		                                
-		                                <?php
-		                                echo "<h5 class='pull-right'>".$total_price."$</h5>";
-		                                echo "<h5>".$_SESSION['cart']['name'][$count]."</h5>";	                                
+                                    <div class="caption">                                       
+                                        <?php
+                                        echo "<h5 class='pull-right'>".$total_price."$</h5>";
+                                        echo "<h5>".$item_name."</h5>";                                 
                                         echo "<h5> Quantity: ".$quantity."</h5>";
                                         echo "<h6> Date: ".$date."</h6>";
-		                                ?>                                      
-	                            	</div>
-		                        </div>
-		                    </div>
-	                        <?	
-	                    $count++;					
+                                        ?>                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <?php   
+                        $count++;                   
                     }
                     if ($count == 0) {
-	                        ?>
-		                    <div class="col-sm-4 col-lg-4 col-md-4">
-		                    	<h1>You have no purchases.</h1>
-		                    </div>
-	                        <?	
+                            ?>
+                            <div class="col-sm-4 col-lg-4 col-md-4">
+                                <h1>You have no purchases.</h1>
+                            </div>
+                            <?php   
                     }
                     ?> 
                 </div>
